@@ -9,7 +9,9 @@ To install the cli, run `composer global require superbig/craftnet-cli`
 Make sure `~/.composer/vendor/bin/` is added to your PATH.
 
 ## Usage
-*Show all the commands*
-`craftnet`
+
+|Command|Description|
+|---|---|
+|`craftnet`|List all the commands|
 
 Brought to you by [Superbig](https://superbig.co)
