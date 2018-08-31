@@ -1,0 +1,31 @@
+{
+  "name": "superbigco/craftnet-cli",
+  "description": "Craftnet CLI",
+  "version": "1.0",
+  "keywords": [
+    ""
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Superbig",
+      "homepage": "https://superbig.co",
+    }
+  ],
+  "require": {
+    "symfony/console": "^2.7",
+    "guzzlehttp/guzzle": "^6.3",
+    "vlucas/phpdotenv": "^2.5"
+  },
+  "bin": [
+    "craftnet"
+  ],
+  "autoload": {
+    "files": [
+      "src/helpers/PrettyJson.php"
+    ],
+    "psr-4": {
+      "CraftnetCli\\": "src"
+    }
+  }
+}

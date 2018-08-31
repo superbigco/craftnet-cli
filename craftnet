@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use CraftnetCli\Command\CraftnetCli\CreateLicenseCommand;
+use CraftnetCli\Command\CraftnetCli\GetLicenseCommand;
+use CraftnetCli\Command\CraftnetCli\GetLicensesCommand;
+use CraftnetCli\Command\CraftnetCli\SetCredentialsCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application('Craftnet Cli', '1.0');
+$application->add(new GetLicensesCommand());
+$application->add(new GetLicenseCommand());
+$application->add(new CreateLicenseCommand());
+$application->add(new SetCredentialsCommand());
+$application->run();
