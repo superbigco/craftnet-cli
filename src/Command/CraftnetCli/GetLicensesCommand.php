@@ -15,10 +15,7 @@ class GetLicensesCommand extends Command
     {
         $this
             ->setName('licenses:list')
-            ->setDescription('Get all licenses from Craftnet')
-            ->setHelp('The command help text goes here');
-
-        // extra command line arguments and options go here.
+            ->setDescription('Get all licenses from Craftnet');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
