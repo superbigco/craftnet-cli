@@ -2,6 +2,8 @@
 
 A CLI for the [Craftnet API](https://docs.api.craftcms.com/).
 
+![Screenshot](screenshots/craftnetcli-screenshot.png)
+
 ## Installation
 
 To install the cli, run `composer global require superbig/craftnet-cli`
