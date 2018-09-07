@@ -8,7 +8,7 @@ use CraftnetCli\Command\CraftnetCli\GetLicensesCommand;
 use CraftnetCli\Command\CraftnetCli\SetCredentialsCommand;
 use Symfony\Component\Console\Application;
 
-$application = new Application('Craftnet Cli', '1.0');
+$application = new Application('Craftnet Cli', '1.0.2');
 $application->add(new GetLicensesCommand());
 $application->add(new GetLicenseCommand());
 $application->add(new CreateLicenseCommand());
