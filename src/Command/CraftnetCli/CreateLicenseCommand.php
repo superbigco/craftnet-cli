@@ -18,8 +18,9 @@ class CreateLicenseCommand extends Command
             ->setDescription('Create a license')
             ->addOption('edition', null, InputOption::VALUE_OPTIONAL, 'Which edition (defaults to standard)', 'standard')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Licencee’s email address')
-            ->addOption('pluginHandle', 'handle', InputOption::VALUE_REQUIRED, 'Plugin handle')
-            ->addOption('notes', null, InputOption::VALUE_OPTIONAL, 'Customer notes')
+            ->addOption('pluginHandle', null, InputOption::VALUE_REQUIRED, 'Plugin handle')
+            ->addOption('notes', null, InputOption::VALUE_OPTIONAL, 'Customer notes', null)
+            ->addOption('privateNotes', null, InputOption::VALUE_OPTIONAL, 'Private notes', null)
             ->setHelp('Creates a new license for a given plugin and email.');
 
         // extra command line arguments and options go here.
@@ -27,13 +28,7 @@ class CreateLicenseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->validate()) {
-            $output->writeln([
-                "You need to provide all required arguments",
-            ]);
-
-            return false;
-        }
+        $input->validate();
 
         $client = new Client();
         $data   = [
@@ -42,15 +37,13 @@ class CreateLicenseCommand extends Command
             'email'   => $input->getOption('email'),
         ];
 
-        foreach (['notes'] as $option) {
+        foreach (['notes', 'privateNotes'] as $option) {
             if ($optionValue = $input->getOption($option)) {
                 $data[ $option ] = $optionValue;
             }
         }
 
-        $response = $client->createLicense([
-            'json' => $data,
-        ]);
+        $response = $client->createLicense($data);
 
         $output->writeln(PrettyJson($response->getBody()));
     }

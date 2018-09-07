@@ -21,13 +21,7 @@ class GetLicenseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->validate()) {
-            $output->writeln([
-                "You need to provide all required arguments",
-            ]);
-
-            return false;
-        }
+        $input->validate();
         
         $client   = new Client();
         $response = $client->getLicense($input->getOption('key'));
