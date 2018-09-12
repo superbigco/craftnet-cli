@@ -44,7 +44,8 @@ class CreateLicenseCommand extends Command
         }
 
         $response = $client->createLicense($data);
+        $body = json_decode($response->getBody(), true);
 
-        $output->writeln(PrettyJson($response->getBody()));
+        $output->writeln(PrettyJson($body));
     }
 }
