@@ -3,10 +3,9 @@
 namespace CraftnetCli\Command\CraftnetCli;
 
 use CraftnetCli\Client;
+use CraftnetCli\Credentials;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GetLicensesCommand extends Command
@@ -20,11 +19,14 @@ class GetLicensesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $client   = new Client();
-        $response = $client->getLicenses();
+        $credentials = new Credentials($output);
+        $client      = new Client();
+        $response    = $client->getLicenses();
 
         $body = json_decode($response->getBody(), true);
 
         $output->writeln(PrettyJson($body));
+
+        return 0;
     }
 }

@@ -23,15 +23,15 @@ class SetCredentialsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $credentials = new Credentials();
         $output->writeln([
             'Enter your Craft ID credentials. You may generate a API key on https://id.craftcms.com/developer/settings',
             '==============================================',
         ]);
 
-        $helper   = $this->getHelper('question');
-        $question = new Question('What is your Craft ID username? ');
-        $username = $helper->ask($input, $output, $question);
+        $credentials = new Credentials($output);
+        $helper      = $this->getHelper('question');
+        $question    = new Question('What is your Craft ID username? ');
+        $username    = $helper->ask($input, $output, $question);
 
         if (!$username) {
             return;
@@ -56,5 +56,7 @@ class SetCredentialsCommand extends Command
             "API key: {$apiKey}",
             '',
         ]);
+
+        return 0;
     }
 }

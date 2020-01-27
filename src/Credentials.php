@@ -2,6 +2,9 @@
 
 namespace CraftnetCli;
 
+use Dotenv\Exception\InvalidPathException;
+use Symfony\Component\Console\Output\OutputInterface;
+
 class Credentials
 {
     const USERNAME = 'USERNAME';
@@ -9,16 +12,28 @@ class Credentials
     const FILENAME = '.craftnet';
 
     protected $dotenv;
+    protected $output;
     private   $_username;
     private   $_apiKey;
 
-    public function __construct()
+    public function __construct(OutputInterface $output = null)
     {
-        $this->dotenv = new \Dotenv\Dotenv($this->getHomePath(), static::FILENAME);
-        $this->dotenv->load();
+        $this->output = $output;
 
-        $this->_username = getenv(static::USERNAME);
-        $this->_apiKey   = getenv(static::APIKEY);
+        try {
+            $this->dotenv = new \Dotenv\Dotenv($this->getHomePath(), static::FILENAME);
+            $this->dotenv->load();
+
+            $this->_username = getenv(static::USERNAME);
+            $this->_apiKey   = getenv(static::APIKEY);
+        } catch (InvalidPathException $e) {
+            if ($this->output) {
+                $this->output->writeln([
+                    'Invalid credentials at ' . $this->getHomePath(),
+                    'Please run licensenses:credentials',
+                ]);
+            }
+        }
     }
 
     public function getUsername()
